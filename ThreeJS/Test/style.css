@@ -1,0 +1,8 @@
+body{
+  margin: 0;
+}
+/* Canvas size always 100% the size of the web page. Because it removes the scrollbar from the web page and keeps canvas 100% of web page size */
+canvas{
+  width: 100%;
+  height: 100%;
+}
