@@ -4,19 +4,23 @@
     <meta charset="utf-8">
     <title>Poseidon</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="styles/styles.css">
+
   </head>
   <body>
 
-  <select name="sourceInput" id="sourceInput">
-    <option value="nyTimes">New York Times</option>
-    <option value="wikipedia">Wikipedia</option>
-    <option value="guardian">Guardian</option>
-    <option value="zeit">Die Zeit</option>
-  </select>
-  <input type="text" id="keyword">Keywords
-  <br>
-  <button type="button" id="searchButton">Poseidon Search</button>
+  <div class="side-menu">
+    <div class="arrow"></div>
+    <select name="sourceInput" id="sourceInput">
+      <option value="nyTimes">New York Times</option>
+      <option value="wikipedia">Wikipedia</option>
+      <option value="guardian">Guardian</option>
+      <option value="zeit">Die Zeit</option>
+    </select>
+    <input type="text" id="keyword">Keywords
+    <br>
+    <button type="button" id="searchButton">Poseidon Search</button>
+  </div>
 
     <script src="../externalFiles/txtwiki.js" charset="utf-8"></script>
     <script src="query.js" charset="utf-8"></script>

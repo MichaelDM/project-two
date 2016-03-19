@@ -27,16 +27,14 @@
 	</head>
 	<body>
 		<div id="info">
-			<a href="http://threejs.org" target="_blank">three.js</a> - webgl ocean simulation<br/>
-			current simulation framebuffers type is <span id="type-status"></span><br/>
-			change type to <span id="change-type"></span>
+
 		</div>
 
-		<script src="../three.min.js"></script>
-		<script src="../libs/stats.min.js"></script>
-		<script src="../libs/dat.gui.min.js"></script>
-		<script src="../controls/OrbitControls.js"></script>
-		<script src="../shaders/OceanShaders.js"></script>
+		<script src="three.min.js"></script>
+		<script src="stats.min.js"></script>
+		<script src="dat.gui.min.js"></script>
+		<script src="OrbitControls.js"></script>
+		<script src="OceanShaders.js"></script>
 		<script src="Ocean.js"></script>
 
 		<script>
@@ -49,8 +47,6 @@
 			var hash = document.location.hash.substr( 1 );
 			if (!(hash in types)) hash = 'half-float';
 
-			document.getElementById('type-status').innerHTML = hash;
-			document.getElementById('change-type').innerHTML = '<a href="#" onclick="return change(\'' + types[hash] + '\')">' + types[hash] + '</a>';
 
 			var lastTime = (new Date()).getTime();
 
