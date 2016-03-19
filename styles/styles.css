@@ -1,1 +1,1 @@
-.side-menu{position:absolute}
+body{margin:0;overflow:hidden;font-family:Monospace;text-align:center}#info{color:#fff;position:absolute;top:10px;width:100%}a{color:#09f}#type-status{font-weight:bold}#stats{position:absolute;top:0;left:0}.side-menu{position:absolute;z-index:10000;top:0;right:0;width:30vw;height:100vh}.dg.main.a{display:none}#fps{display:none}
