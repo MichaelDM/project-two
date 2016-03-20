@@ -2,6 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.js" charset="utf-8"></script>
     <link rel="stylesheet" href="styles/styles.css">
@@ -191,26 +192,54 @@
 		</script>
 
 		<div class="side-menu">
-	  
-			<!-- dropdown-one -->
-		  <select id="sourceInput" class="cd-select cd-dropdown-one">
-				<option value="-1" selected>Select a source</option>
-				<option value="nyTimes">New York Times</option>
-				<option value="wikipedia">Wikipedia</option>
-				<option value="guardian">Guardian</option>
-				<option value="zeit">Die Zeit</option>
-			</select>
-	    <input type="text" id="keyword">Keywords
-	    <br>
-	    <button type="button" id="searchButton">Poseidon Search</button>
-	  </div>
+			<div class="menu-icon-wrapper">
+				<span></span>
+			</div>
+			<div class="internal-menu-wrapper">
+				<div class="internal-content-wrapper">
 
+					<input type="text" id="keyword" placeholder="Keywords" >
+					<select id="sourceInput" class="cd-select cd-dropdown-one">
+						<option value="-1" selected>Select a source</option>
+						<option value="nyTimes">New York Times</option>
+						<option value="wikipedia">Wikipedia</option>
+						<option value="guardian">Guardian</option>
+						<option value="zeit">Die Zeit</option>
+					</select>
+					<button type="button" id="searchButton">Poseidon Search
+					</button>
+					<div class="interpretation">
+						<ul>
+							<li>SEA READING</li>
+							<li>Bright: positive</li>
+							<li>Dark: negative&nbsp;</li>
+							<li>Rugged: biased</li>
+							<li>Calm: neutral&nbsp;&nbsp;&nbsp;&nbsp;</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="externalFiles/jquery.dropdown.js"></script>
     <script src="../externalFiles/txtwiki.js" charset="utf-8"></script>
     <script src="query.js" charset="utf-8"></script>
     <script src="apiKeys.js" charset="utf-8"></script>
     <script src="ajax.js" charset="utf-8"></script>
     <script src="apiObjects.js" charset="utf-8"></script>
     <script src="main.js" charset="utf-8"></script>
+
+		<!-- SCRIPT TAKEN FROM CODEDROPS -->
+		<script type="text/javascript">
+
+			$( function() {
+
+				$( '.cd-dropdown-one' ).dropdown( {
+					gutter : 5,
+					stack : false,
+					slidingIn : 100
+				} );
+			});
+		</script>
 
 	</body>
 </html>

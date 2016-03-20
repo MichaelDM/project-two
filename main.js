@@ -11,3 +11,13 @@ $('button').on('click',function(){
     console.log('click');
 
 });
+
+
+// toggle arrow menu
+$('.menu-icon-wrapper').on('click', function(){
+  event.preventDefault();
+  $('.menu-icon-wrapper span').toggleClass('menu-icon-wrapper-close');
+
+    $('.side-menu').toggleClass('side-menu-close');
+
+});
