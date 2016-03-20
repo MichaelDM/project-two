@@ -1,11 +1,7 @@
 $(document).ready(function(){
   $('button').on('click',function(){
       // storing the api to seach for in object and storing value of button in appropriate object
-      ajaxObject.apiToSearch = $('#sourceInput option:selected').val();
-
-      // once I transition, $('.cd-dropdown span span').text()
-      // also change the cases in switch statement in apiObjects
-
+      ajaxObject.apiToSearch = $('.cd-dropdown span span').text();
 
       // making API call according to selected API value
       var endpoint = allApiObject.selectApiToCall(ajaxObject.apiToSearch);
@@ -23,7 +19,6 @@ $(document).ready(function(){
 
   //hiding search when choosing a source
   $('.cd-dropdown').on('click',function(){
-    console.log('click');
     $('#searchButton').toggleClass('cd-dropdown-hide');
   });
 });
