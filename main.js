@@ -42,3 +42,6 @@ $(document).ready(function(){
     $('#searchButton').toggleClass('cd-dropdown-hide');
   });
 });
+
+//hacking controller: simulating click:
+ // simulate(document.querySelector('ul li:nth-child(3) .slider-fg'), "mousedown", { pointerX: 1515, pointerY: 76 });

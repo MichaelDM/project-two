@@ -109,6 +109,7 @@
 					});
 					var c3 = gui.add(this.ms_Ocean, "windX",-15, 15);
 					c3.onChange(function (v) {
+						console.log(event);
 						this.object.windX = v;
 						this.object.changed = true;
 					});

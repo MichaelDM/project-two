@@ -1,10 +1,10 @@
 //out: styles.css, compress: true
 
 //hiding the controls panel
-.dg.main.a{
-  display: none;
-}
-// hiding left top graph
+// .dg.main.a{
+//   display: none;
+// }
+hiding left top graph
 #fps{
   display:none;
 }
@@ -240,6 +240,32 @@ ul li[data-value] span {
   top: -40px;
   color: red
 }
+
+
+//this code helps hack the control panel
+.dg.main.a{
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+// .dg,
+// .dg input,
+// .dg ul li,
+// .dg .slider,
+// .dg .slider:hover,
+// .dg .slider-fg,
+// .dg .slider:hover .slider-fg
+// {
+//   background-color: transparent !important;
+//   color: transparent !important;
+//   background: transparent !important;
+//   text-shadow: none !important;
+//   border-color: transparent !important;
+//   overflow: transparent !important;
+// }
 
 @media (max-width: 1500px){
   .side-menu{
