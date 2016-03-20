@@ -3,26 +3,59 @@ var alchemyObject = {
   apikey : '&apikey='+sentAnalysisKey,
   textPrefix : 'text=',
   textURI : "null",
-  outputMode : 'outputMode=json',
+  outputMode : '&outputMode=json',
   showSourceText : '&showSourceText=0',
   //all info specific to Sentiment-Analysis Call
   sentimentAnalysis : {
     endpoint : 'http://gateway-a.watsonplatform.net/calls/text/TextGetTextSentiment?',
     baseQuery : "Null"
   },
-  //all info about the Keyword-Level Sentiment Analysis Call
-  keywordSentimentAnalysis : {
-    endpoint : 'http://gateway-a.watsonplatform.net/calls/url/URLGetTextSentiment?'
-  },
+  //all info about the Keyword-Level Sentiment Analysis Call - NOT USED AT THIS POINT
+  // keywordSentimentAnalysis : {
+  //   endpoint : 'http://gateway-a.watsonplatform.net/calls/url/URLGetTextSentiment?'
+  // },
   makeAjaxRequest : function(){
     var alchemyQueryString = alchemyObject.textPrefix+alchemyObject.textURI+alchemyObject.sentimentAnalysis.baseQuery;
     console.log('alchemyQueryString is',alchemyQueryString);
-    ajaxObject.ajaxCall(alchemyObject.sentimentAnalysis.endpoint,alchemyQueryString, function(resp){
-    });
+    ajaxObject.ajaxCall(alchemyObject.sentimentAnalysis.endpoint,alchemyQueryString,DEMO.ms_Ocean.setOceanValue);
   }
 };
 // sets base query in sentiment Analysis Call
-(function (){ return alchemyObject.sentimentAnalysis.baseQuery = alchemyObject.apikey + alchemyObject.showSourceText;}());
+(function (){ return alchemyObject.sentimentAnalysis.baseQuery = alchemyObject.apikey + alchemyObject.outputMode+ alchemyObject.showSourceText;}());
+
+
+// expanding on the existing DEMO.ms_Ocean object set in Index and defined in Three.js example
+DEMO.ms_Ocean.setOceanValue = function(alchemyResponse){
+  console.log('setting ocean values');
+  // checking if alchemy returns an error
+  if (alchemyResponse.docSentiment.status === 'ERROR'){
+    console.log('alchemy returned an error');
+    console.log(alchemyResponse.docSentiment);
+    return;
+  }
+  // set to initial conditions if neutral
+  else if (alchemyResponse.docSentiment.type === 'neutral'){
+    DEMO.ms_Ocean.choppiness = 0.1;
+    DEMO.ms_Ocean.exposure = 0.25;
+  } else {
+    console.log('going in else');
+    var score = alchemyResponse.docSentiment.score;
+    var scoreAbsoluteValue = Math.abs(score);
+    console.log('scoreAbsoluteValue', scoreAbsoluteValue);
+    console.log('score is ',score);
+    console.log('object at start is', DEMO.ms_Ocean);
+    DEMO.ms_Ocean.choppiness = DEMO.ms_Ocean.valueConvert(1,0,4,0.1,scoreAbsoluteValue);
+    DEMO.ms_Ocean.windX = 15;
+    DEMO.ms_Ocean.windY = 15;
+    DEMO.ms_Ocean.exposure = DEMO.ms_Ocean.valueConvert(1,0,0.5,0,scoreAbsoluteValue);
+    console.log('object at finish is', DEMO.ms_Ocean);
+  }
+  return;
+};
+DEMO.ms_Ocean.valueConvert = function(OldMax, OldMin, NewMax, NewMin, OldValue){
+  console.log('returning value,',(((OldValue - OldMin) * (NewMax - NewMin)) / (OldMax - OldMin)) + NewMin);
+  return ((((OldValue - OldMin) * (NewMax - NewMin)) / (OldMax - OldMin)) + NewMin);
+};
 
 
 // object used to store all info about the Alchemy API: http://www.alchemyapi.com/api/sentiment/textc.html
@@ -94,8 +127,8 @@ var zeitObject = {
     for (var i=0; i<zeitArticles.matches.length; i++){
         stringArticles += zeitArticles.matches[i].snippet;
     }
-    // making sure stringArticles not more than 4500 (exceed limit for alchemyAPI)
-    if (stringArticles.length>4500){
+    // making sure stringArticles not more than 4000 (exceed limit for alchemyAPI)
+    if (stringArticles.length>4000){
       stringArticles = stringArticles.slice(0, 4000);
     }
     // storing encoded URI of aggregate articles into alchemy object

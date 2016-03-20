@@ -34,7 +34,7 @@ function callback(data){
 		parsed = parsed.slice(0,parsed.indexOf("==Notes=="));
 	}
 	// console.log('data loged from query.js',parsed);
-	parsed = parsed.slice(parsed.length-4500, parsed.length);
+	parsed = parsed.slice(parsed.length-4000, parsed.length);
 	alchemyObject.textURI = encodeURI(parsed);
 	alchemyObject.makeAjaxRequest();
 }

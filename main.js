@@ -1,4 +1,11 @@
 $(document).ready(function(){
+
+  //initiall chopiness and exposure of the sea
+  DEMO.ms_Ocean.choppiness = 0;
+  DEMO.ms_Ocean.exposure = 0.25;
+  // DEMO.ms_Ocean.windX = 0;
+  // DEMO.ms_Ocean.windY = 0;
+
   $('button').on('click',function(){
 
     // checking that neight input source is empty
