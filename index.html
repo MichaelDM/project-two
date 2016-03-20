@@ -16,6 +16,7 @@
 		<script src="ThreeJS/OrbitControls.js"></script>
 		<script src="ThreeJS/OceanShaders.js"></script>
 		<script src="ThreeJS/Ocean.js"></script>
+		<script src="hackController.js" charset="utf-8"></script>
 
 		<!-- script taken from Three JS: https://github.com/mrdoob/three.js/blob/master/examples/webgl_shaders_ocean2.html -->
 		<script>
@@ -78,7 +79,7 @@
 					{
 						USE_HALF_FLOAT : hash === 'half-float',
 						INITIAL_SIZE : 256.0,
-						INITIAL_WIND : [10.0, 10.0],
+						INITIAL_WIND : [2.0, 2.0],
 						INITIAL_CHOPPINESS : 1.5,
 						CLEAR_COLOR : [1.0, 1.0, 1.0, 0.0],
 						GEOMETRY_ORIGIN : [origx, origz],
