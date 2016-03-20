@@ -121,7 +121,7 @@ var allApiObject = {
   // function that selects which API's to store the submitted values
   selectApiToCall : function(apiToSearch){
     switch (apiToSearch) {
-      case 'nyTimes':
+      case 'NY Times':
         // storing the keyword to search in nyTimes object
         nyTimesObject.textToSearch = encodeURIComponent($('#keyword').val());
         // building specific query
@@ -129,19 +129,19 @@ var allApiObject = {
         // making ajax call
         ajaxObject.ajaxCall(nyTimesObject.endpoint,specificQuery,nyTimesObject.constructStringForSentimentAnalysis, "");
         break;
-      case 'wikipedia':
+      case 'Wikipedia':
         // storing the keyword to search in wikipedia object
         wikiObject.textToSearch = encodeURIComponent($('#keyword').val());
         // making ajax calls
         ajaxObject.ajaxCall(wikiObject.endpoint,wikiObject.textToSearch,callback, 'JSONP');
         break;
-      case 'guardian':
+      case 'Guardian':
         // storing the keyword to search in guardian object
         guardianObject.textToSearch = encodeURIComponent($('#keyword').val());
         // making ajax call
         ajaxObject.ajaxCall(guardianObject.endpoint,guardianObject.textToSearch,guardianObject.constructStringForSentimentAnalysis, '');
         break;
-      case 'zeit':
+      case 'Die Zeit':
         yandexObject.textToTranslate = encodeURIComponent($('#keyword').val());
         // making ajax call to yandex api to translate word in german
         ajaxObject.ajaxCall(yandexObject.endpoint, yandexObject.textToTranslate, yandexObject.makeAjaxCalltoZeit, "");
