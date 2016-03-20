@@ -24,6 +24,42 @@ var alchemyObject = {
 (function (){ return alchemyObject.sentimentAnalysis.baseQuery = alchemyObject.apikey + alchemyObject.outputMode+ alchemyObject.showSourceText;}());
 
 
+controllerHackObject = {
+  elWindX : document.querySelector('ul li:nth-child(3) .slider'),
+  WindXPos : 'null',
+  WindYPos : 'null',
+
+  getWindXPos : function(){
+    controllerHackObject.WindXPos = controllerHackObject.elWindX.getBoundingClientRect();
+    console.log(controllerHackObject.WindXPos.top, controllerHackObject.WindXPos.right, controllerHackObject.WindXPos.bottom, controllerHackObject.WindXPos.left);
+  },
+  getWindYPos : function(){
+    controllerHackObject.WindYPos = controllerHackObject.elWindX.getBoundingClientRect();
+    console.log(controllerHackObject.WindYPos.top, controllerHackObject.WindYPos.right, controllerHackObject.WindYPos.bottom, controllerHackObject.WindYPos.left);
+  },
+
+  windXClick : function(score){
+    //defining click positions in x and y
+    var x = score+controllerHackObject.WindXPos.left;
+    var y = (controllerHackObject.WindXPos.top + controllerHackObject.WindXPos.bottom)/2;
+
+    // simulating click
+    simulate(document.querySelector('ul li:nth-child(3) .slider-fg'), "mousedown", { pointerX: x , pointerY: y });
+    simulate(document.querySelector('ul li:nth-child(3) .slider-fg'), "mouseup", { pointerX: x , pointerY: y });
+  },
+  windYClick : function(score){
+    //defining click positions in x and y
+    var x = score+controllerHackObject.WindYPos.left;
+    var y = (controllerHackObject.WindYPos.top + controllerHackObject.WindYPos.bottom)/2;
+
+    // simulating click
+    simulate(document.querySelector('ul li:nth-child(4) .slider-fg'), "mousedown", { pointerX: x , pointerY: y });
+    simulate(document.querySelector('ul li:nth-child(4) .slider-fg'), "mouseup", { pointerX: x , pointerY: y });
+  }
+
+};
+
+
 // expanding on the existing DEMO.ms_Ocean object set in Index and defined in Three.js example
 DEMO.ms_Ocean.setOceanValue = function(alchemyResponse){
   console.log('setting ocean values');
@@ -38,22 +74,32 @@ DEMO.ms_Ocean.setOceanValue = function(alchemyResponse){
     DEMO.ms_Ocean.choppiness = 0.1;
     DEMO.ms_Ocean.exposure = 0.25;
   } else {
-    console.log('going in else');
+    // console.log('going in else');
     var score = alchemyResponse.docSentiment.score;
-    var scoreAbsoluteValue = Math.abs(score);
-    console.log('scoreAbsoluteValue', scoreAbsoluteValue);
+
     console.log('score is ',score);
     console.log('object at start is', DEMO.ms_Ocean);
-    DEMO.ms_Ocean.choppiness = DEMO.ms_Ocean.valueConvert(1,0,4,0.1,scoreAbsoluteValue);
-    DEMO.ms_Ocean.windX = 15;
-    DEMO.ms_Ocean.windY = 15;
-    DEMO.ms_Ocean.exposure = DEMO.ms_Ocean.valueConvert(1,0,0.5,0,scoreAbsoluteValue);
+    DEMO.ms_Ocean.choppiness = DEMO.ms_Ocean.valueConvert(1,-1,4,0.1,score);
+    DEMO.ms_Ocean.exposure = DEMO.ms_Ocean.valueConvert(1,-1,0.5,0,score);
+
+    // getting wind x and y controller box position
+    controllerHackObject.getWindXPos();
+    controllerHackObject.getWindYPos();
+    // converting it to math scale - proper % of controller width
+    var scaledXtoControl = DEMO.ms_Ocean.valueConvert(1,-1, controllerHackObject.WindXPos.width,0,score);
+    console.log('scaledXtoControl IS', scaledXtoControl  );
+    // clicking on controller
+    controllerHackObject.windXClick(scaledXtoControl);
+    controllerHackObject.windYClick(scaledXtoControl);
+
+
+
     console.log('object at finish is', DEMO.ms_Ocean);
   }
   return;
 };
 DEMO.ms_Ocean.valueConvert = function(OldMax, OldMin, NewMax, NewMin, OldValue){
-  console.log('returning value,',(((OldValue - OldMin) * (NewMax - NewMin)) / (OldMax - OldMin)) + NewMin);
+  // console.log('returning value,',(((OldValue - OldMin) * (NewMax - NewMin)) / (OldMax - OldMin)) + NewMin);
   return ((((OldValue - OldMin) * (NewMax - NewMin)) / (OldMax - OldMin)) + NewMin);
 };
 
