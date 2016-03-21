@@ -201,6 +201,33 @@ ul li[data-value] span {
   border-radius: 10px;
   width: 300px
 }
+
+@-webkit-keyframes searchKeyframe {
+  0% { -webkit-transform: scale(1); }
+  50%   { -webkit-transform: scale(1.1); }
+  100% { -webkit-transform: scale(1); }
+}
+@-moz-keyframes searchKeyframe {
+  0%   { -ms-transform: scale(1); }
+  50%   { -ms-transform: scale(1.1); }
+  100% { -ms-transform: scale(1); }
+}
+@-o-keyframes searchKeyframe {
+  0% { -0-transform: scale(1); }
+  50%   { -0-transform: scale(1.1); }
+  100% { -0-transform: scale(1); }
+}
+@keyframes searchKeyframe {
+  0% { transform: scale(1); }
+  50%   { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+.searchButton-clicked{
+  -webkit-animation: searchKeyframe 0.15s 1 ease; /* Safari 4+ */
+    -moz-animation:    searchKeyframe 0.15s 1 ease; /* Fx 5+ */
+    -o-animation:      searchKeyframe 0.15s 1 ease; /* Opera 12+ */
+    animation:         searchKeyframe 0.15s 1 ease; /* IE 10+, Fx 29+ */
+}
 .lines{
   background-color: blue;
   max-width: 80%;

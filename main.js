@@ -8,6 +8,13 @@ $(document).ready(function(){
 
   $('button').on('click',function(){
 
+    //adding interaction to click so user knows he has clicked
+
+    $(this).addClass('searchButton-clicked');
+    setTimeout(function () {
+      $('button').removeClass('searchButton-clicked');
+    }, 160);
+
     // clearing neutral sentiment if that has been added to page
     $('.neutral-result').text('');
 
