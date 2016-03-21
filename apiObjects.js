@@ -63,12 +63,10 @@ controllerHackObject = {
 // expanding on the existing DEMO.ms_Ocean object set in Index and defined in Three.js example
 DEMO.ms_Ocean.setOceanValue = function(alchemyResponse){
   console.log('setting ocean values');
+  console.log('typeof is',typeof(alchemyResponse));
+  console.log('length of status is',alchemyResponse.length);
   // checking if alchemy returns an error
-  if (alchemyResponse.docSentiment.status === 'ERROR'){
-    console.log('alchemy returned an error');
-    console.log(alchemyResponse.docSentiment);
-    return;
-  }
+
   //warning user if neutral result
   if (alchemyResponse.docSentiment.type === 'neutral'){
     console.log('got neutral result');
