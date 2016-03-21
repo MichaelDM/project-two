@@ -70,7 +70,10 @@ DEMO.ms_Ocean.setOceanValue = function(alchemyResponse){
   else if (alchemyResponse.docSentiment.type === 'neutral'){
     DEMO.ms_Ocean.choppiness = 0.1;
     DEMO.ms_Ocean.exposure = 0.25;
-  } else {
+  } else if (alchemyResponse.docSentiment.score <0.1 && alchemyResponse.docSentiment.score>-0.1){
+    return $('.neutral-result').text('result: neutral sentiment');
+  } 
+  else {
     // console.log('going in else');
     var score = alchemyResponse.docSentiment.score;
 
