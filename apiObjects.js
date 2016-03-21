@@ -76,6 +76,15 @@ controllerHackObject = {
 DEMO.ms_Ocean.setOceanValue = function(alchemyResponse){
   // checking if alchemy returns an error
 
+  try {
+    if (alchemyResponse.docSentiment.type){
+
+    }
+  } catch(error) {
+    // its not json
+    return $('.neutral-result').text('Keyword(s) chosen did not yield a response.');
+  }
+
   //warning user if neutral result + set sea to neutral
   if (alchemyResponse.docSentiment.type === 'neutral' || (alchemyResponse.docSentiment.score <0.1 && alchemyResponse.docSentiment.score>-0.1)
   ){
