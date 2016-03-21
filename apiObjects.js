@@ -34,7 +34,6 @@ controllerHackObject = {
   },
   getWindYPos : function(){
     controllerHackObject.WindYPos = controllerHackObject.elWindX.getBoundingClientRect();
-    console.log(controllerHackObject.WindYPos.top, controllerHackObject.WindYPos.right, controllerHackObject.WindYPos.bottom, controllerHackObject.WindYPos.left);
   },
 
   windXClick : function(score){
