@@ -15,6 +15,7 @@ hiding left top graph
 @import url('css/common.css');
 
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+@import url(https://fonts.googleapis.com/css?family=Cinzel);
 
 /*CODE TAKEN FROM CODROPS: http://tympanus.net/codrops/2012/11/29/simple-effects-for-drop-down-lists/*/
 
@@ -104,34 +105,52 @@ ul li[data-value] span {
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
 }
-.modal h1{
-  text-align: center;
-}
+
 
 /* Modal Content/Box */
 .modal-content {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    -ms-transform: translateX(-50%) translateY(-50%);
-    -o-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
-    width: 420px;
-    background-color: rgba(255, 255, 255, 0.7);
-    padding: 50px 100px;
-    border: 1px solid #888;
-}
-.modal-content h1{
-  margin-bottom: 1em;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  width: 420px;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 50px 100px;
+  border: 1px solid #888;
+  h1{
+    font-family: 'Cinzel', serif;
+    margin-bottom: 0.5em;
+  }
+  ul{
+    list-style-type: none;
+  }
+  a{
+    text-decoration: none;
+  }
+  p span{
+    font-size: 0.8em;
+    margin-bottom: 0.2em;
+  }
 }
 
+
 /* The Close Button */
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+span.close {
+  color: black;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  z-index: 2;
+  -webkit-transform: translateX(30px);
+  -ms-transform: translateX(30px);
+  -o-transform: translateX(30px);
+  transform: translateX(30px);
+  &:hover{
+    color: beige;
+  }
 }
 
 .close:hover,
@@ -368,6 +387,11 @@ ul li[data-value] span {
   }
   .side-menu-close{
     right: -275px;
+  }
+}
+@media (max-width: 1100px){
+  .modal-content{
+    background-color: white;
   }
 }
 @media (max-width: 768px){
