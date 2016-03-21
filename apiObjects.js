@@ -53,6 +53,20 @@ controllerHackObject = {
     // simulating click
     simulate(document.querySelector('ul li:nth-child(4) .slider-fg'), "mousedown", { pointerX: x , pointerY: y });
     simulate(document.querySelector('ul li:nth-child(4) .slider-fg'), "mouseup", { pointerX: x , pointerY: y });
+  },
+  setToNeutral : function(){
+    //getting middle coordinates
+    var xX = (controllerHackObject.WindXPos.left+controllerHackObject.WindXPos.right)/2;
+    var yX = (controllerHackObject.WindXPos.top + controllerHackObject.WindXPos.bottom)/2;
+    var xY = (controllerHackObject.WindYPos.left+controllerHackObject.WindYPos.right)/2;
+    var yY = (controllerHackObject.WindYPos.top + controllerHackObject.WindYPos.bottom)/2;
+    // clicking on correct points
+    //for windX
+    simulate(document.querySelector('ul li:nth-child(3) .slider-fg'), "mousedown", { pointerX: xX , pointerY: yX });
+    simulate(document.querySelector('ul li:nth-child(3) .slider-fg'), "mouseup", { pointerX: xX , pointerY: yX });
+    //for windY
+    simulate(document.querySelector('ul li:nth-child(4) .slider-fg'), "mousedown", { pointerX: xY , pointerY: yY });
+    simulate(document.querySelector('ul li:nth-child(4) .slider-fg'), "mouseup", { pointerX: xY , pointerY: yY });
   }
 
 };
@@ -62,18 +76,18 @@ controllerHackObject = {
 DEMO.ms_Ocean.setOceanValue = function(alchemyResponse){
   // checking if alchemy returns an error
 
-  //warning user if neutral result
-  if (alchemyResponse.docSentiment.type === 'neutral'){
-    return $('.neutral-result').text('result: neutral sentiment');
-  }
-  // set to initial conditions if neutral
-  else if (alchemyResponse.docSentiment.type === 'neutral'){
+  //warning user if neutral result + set sea to neutral
+  if (alchemyResponse.docSentiment.type === 'neutral' || (alchemyResponse.docSentiment.score <0.1 && alchemyResponse.docSentiment.score>-0.1)
+  ){
     DEMO.ms_Ocean.choppiness = 0.1;
-    DEMO.ms_Ocean.exposure = 0.25;
-  } else if (alchemyResponse.docSentiment.score <0.1 && alchemyResponse.docSentiment.score>-0.1){
-    return $('.neutral-result').text('result: neutral sentiment');
-  } 
-  else {
+    DEMO.ms_Ocean.exposure = 0.45;
+    // getting wind x and y controller box position
+    controllerHackObject.getWindXPos();
+    controllerHackObject.getWindYPos();
+    // clicking on controller
+    controllerHackObject.setToNeutral();
+    $('.neutral-result').text('result: neutral sentiment');
+  } else {
     // console.log('going in else');
     var score = alchemyResponse.docSentiment.score;
 
@@ -90,7 +104,6 @@ DEMO.ms_Ocean.setOceanValue = function(alchemyResponse){
     controllerHackObject.windXClick(scaledXtoControl);
     controllerHackObject.windYClick(scaledXtoControl);
   }
-  return;
 };
 DEMO.ms_Ocean.valueConvert = function(OldMax, OldMin, NewMax, NewMin, OldValue){
   // console.log('returning value,',(((OldValue - OldMin) * (NewMax - NewMin)) / (OldMax - OldMin)) + NewMin);
