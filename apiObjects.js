@@ -16,7 +16,6 @@ var alchemyObject = {
   // },
   makeAjaxRequest : function(){
     var alchemyQueryString = alchemyObject.textPrefix+alchemyObject.textURI+alchemyObject.sentimentAnalysis.baseQuery;
-    console.log('alchemyQueryString is',alchemyQueryString);
     ajaxObject.ajaxCall(alchemyObject.sentimentAnalysis.endpoint,alchemyQueryString,DEMO.ms_Ocean.setOceanValue);
   }
 };
@@ -31,7 +30,7 @@ controllerHackObject = {
 
   getWindXPos : function(){
     controllerHackObject.WindXPos = controllerHackObject.elWindX.getBoundingClientRect();
-    console.log(controllerHackObject.WindXPos.top, controllerHackObject.WindXPos.right, controllerHackObject.WindXPos.bottom, controllerHackObject.WindXPos.left);
+    // console.log(controllerHackObject.WindXPos.top, controllerHackObject.WindXPos.right, controllerHackObject.WindXPos.bottom, controllerHackObject.WindXPos.left);
   },
   getWindYPos : function(){
     controllerHackObject.WindYPos = controllerHackObject.elWindX.getBoundingClientRect();
@@ -62,14 +61,10 @@ controllerHackObject = {
 
 // expanding on the existing DEMO.ms_Ocean object set in Index and defined in Three.js example
 DEMO.ms_Ocean.setOceanValue = function(alchemyResponse){
-  console.log('setting ocean values');
-  console.log('typeof is',typeof(alchemyResponse));
-  console.log('length of status is',alchemyResponse.length);
   // checking if alchemy returns an error
 
   //warning user if neutral result
   if (alchemyResponse.docSentiment.type === 'neutral'){
-    console.log('got neutral result');
     return $('.neutral-result').text('result: neutral sentiment');
   }
   // set to initial conditions if neutral
@@ -80,8 +75,7 @@ DEMO.ms_Ocean.setOceanValue = function(alchemyResponse){
     // console.log('going in else');
     var score = alchemyResponse.docSentiment.score;
 
-    console.log('score is ',score);
-    console.log('object at start is', DEMO.ms_Ocean);
+    console.log('SENTIMENT ANALYSIS SCORES: ',score);
     DEMO.ms_Ocean.choppiness = DEMO.ms_Ocean.valueConvert(1,-1,4,0.1,score);
     DEMO.ms_Ocean.exposure = DEMO.ms_Ocean.valueConvert(1,-1,0.5,0,score);
 
@@ -90,11 +84,9 @@ DEMO.ms_Ocean.setOceanValue = function(alchemyResponse){
     controllerHackObject.getWindYPos();
     // converting it to math scale - proper % of controller width
     var scaledXtoControl = DEMO.ms_Ocean.valueConvert(1,-1, controllerHackObject.WindXPos.width,0,score);
-    console.log('scaledXtoControl IS', scaledXtoControl  );
     // clicking on controller
     controllerHackObject.windXClick(scaledXtoControl);
     controllerHackObject.windYClick(scaledXtoControl);
-    console.log('object at finish is', DEMO.ms_Ocean);
   }
   return;
 };
@@ -167,7 +159,6 @@ var zeitObject = {
   textToSearch : 'null',
   endpoint: 'http://api.zeit.de/content?api_key='+zeitKey+'&limit=60&q=',
   constructStringForSentimentAnalysis : function(zeitArticles){
-    console.log('zeit articles results is', zeitArticles);
     var stringArticles = "";
     // building string with abstract, and if abstract === null, using snippet instead
     for (var i=0; i<zeitArticles.matches.length; i++){
@@ -190,7 +181,6 @@ var yandexObject = {
   endpoint: 'https://translate.yandex.net/api/v1.5/tr.json/translate?key='+yandexKey+'&lang=en-de&format=plain&text=',
   makeAjaxCalltoZeit : function(translatedData){
     zeitObject.textToSearch = translatedData.text[0];
-    console.log('text to search is ', zeitObject.textToSearch);
     ajaxObject.ajaxCall(zeitObject.endpoint,zeitObject.textToSearch,zeitObject.constructStringForSentimentAnalysis,"" );
   }
 };

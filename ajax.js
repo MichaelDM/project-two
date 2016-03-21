@@ -9,8 +9,7 @@ var ajaxObject = {
       url: endpoint+queryString,
       dataType: typeData,
       success: function(response){
-        console.log('response from my ajax call is',response);
-        console.log('my ajax url is', endpoint+queryString);
+        // console.log('response from my ajax call is',response);
         functionToCall(response);
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {

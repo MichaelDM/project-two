@@ -5,7 +5,6 @@
 // "use strict";
 
 function callback(data){
-	console.log('my data is ',data);
 
 	var pageid = data["query"]["pageids"][0];
 	if (pageid == "-1"){
@@ -36,6 +35,5 @@ function callback(data){
 	// console.log('data loged from query.js',parsed);
 	parsed = parsed.slice(parsed.length-3500, parsed.length);
 	alchemyObject.textURI = encodeURI(parsed);
-	console.log('PARSED IS', parsed);
 	alchemyObject.makeAjaxRequest();
 }

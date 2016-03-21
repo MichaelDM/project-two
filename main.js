@@ -60,8 +60,6 @@ $(document).ready(function(){
 
       // making API call according to selected API value
       var endpoint = allApiObject.selectApiToCall(ajaxObject.apiToSearch);
-      console.log('click');
-
   });
 
 
