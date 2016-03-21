@@ -1,11 +1,11 @@
 // CODE TAKEN FROM TXTWIKI.JS
 //https://github.com/joaomsa/txtwiki.js
+// used to make qpi queries to WIKIPEDIA
 
 // "use strict";
 
 function callback(data){
 	console.log('my data is ',data);
-	var content = document.getElementById("content");
 
 	var pageid = data["query"]["pageids"][0];
 	if (pageid == "-1"){
@@ -34,7 +34,8 @@ function callback(data){
 		parsed = parsed.slice(0,parsed.indexOf("==Notes=="));
 	}
 	// console.log('data loged from query.js',parsed);
-	parsed = parsed.slice(parsed.length-4000, parsed.length);
+	parsed = parsed.slice(parsed.length-3500, parsed.length);
 	alchemyObject.textURI = encodeURI(parsed);
+	console.log('PARSED IS', parsed);
 	alchemyObject.makeAjaxRequest();
 }

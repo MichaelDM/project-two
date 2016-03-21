@@ -69,6 +69,11 @@ DEMO.ms_Ocean.setOceanValue = function(alchemyResponse){
     console.log(alchemyResponse.docSentiment);
     return;
   }
+  //warning user if neutral result
+  if (alchemyResponse.docSentiment.type === 'neutral'){
+    console.log('got neutral result');
+    return $('.neutral-result').text('result: neutral sentiment');
+  }
   // set to initial conditions if neutral
   else if (alchemyResponse.docSentiment.type === 'neutral'){
     DEMO.ms_Ocean.choppiness = 0.1;
@@ -91,9 +96,6 @@ DEMO.ms_Ocean.setOceanValue = function(alchemyResponse){
     // clicking on controller
     controllerHackObject.windXClick(scaledXtoControl);
     controllerHackObject.windYClick(scaledXtoControl);
-
-
-
     console.log('object at finish is', DEMO.ms_Ocean);
   }
   return;
@@ -173,9 +175,9 @@ var zeitObject = {
     for (var i=0; i<zeitArticles.matches.length; i++){
         stringArticles += zeitArticles.matches[i].snippet;
     }
-    // making sure stringArticles not more than 4000 (exceed limit for alchemyAPI)
-    if (stringArticles.length>4000){
-      stringArticles = stringArticles.slice(0, 4000);
+    // making sure stringArticles not more than 3500 (exceed limit for alchemyAPI)
+    if (stringArticles.length>3500){
+      stringArticles = stringArticles.slice(0, 3500);
     }
     // storing encoded URI of aggregate articles into alchemy object
     alchemyObject.textURI = encodeURI(stringArticles);
@@ -211,7 +213,7 @@ var allApiObject = {
       case 'Wikipedia':
         // storing the keyword to search in wikipedia object
         wikiObject.textToSearch = encodeURIComponent($('#keyword').val());
-        // making ajax calls
+        // making ajax calls. ps: callback is a function defined in query.js
         ajaxObject.ajaxCall(wikiObject.endpoint,wikiObject.textToSearch,callback, 'JSONP');
         break;
       case 'Guardian':

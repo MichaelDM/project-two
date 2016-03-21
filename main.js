@@ -8,7 +8,10 @@ $(document).ready(function(){
 
   $('button').on('click',function(){
 
-    // checking that neight input source is empty
+    // clearing neutral sentiment if that has been added to page
+    $('.neutral-result').text('');
+
+    // checking that neither input sources are empty
     if($('#keyword').val().length<1 || $('.cd-dropdown span span').text().length<1){
       $('.empty-source-error').text('Poseidon search needs keyword(s) and input source');
     }
